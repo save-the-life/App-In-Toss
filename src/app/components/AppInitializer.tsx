@@ -30,13 +30,16 @@ const AppInitializer: React.FC<AppInitializerProps> = ({ onInitialized }) => {
     useEffect(() => {
         console.log("Check Toss Login");
         (async () => {
-          try {
-            const { authorizationCode, referrer } = await requestAuthorizationCode(SCOPES);
-            const { access_token, refresh_token } = await generateToken(authorizationCode, referrer);
-            // setTokens({ accessToken: access_token, refreshToken: refresh_token, /*…*/ });
-            const userInfo = await fetchUserInfo(access_token);
-            // setUserInfo(userInfo);
-            onInitialized();
+            try {
+                console.log("인증 코드 확인")
+                const { authorizationCode, referrer } = await requestAuthorizationCode(SCOPES);
+                console.log("토큰 발급");
+                const { access_token, refresh_token } = await generateToken(authorizationCode, referrer);
+                console.log("사용자 정보 획득");
+                // setTokens({ accessToken: access_token, refreshToken: refresh_token, /*…*/ });
+                const userInfo = await fetchUserInfo(access_token);
+                // setUserInfo(userInfo);
+                onInitialized();
         } catch (err: any) {
             setError(err.message);
           }
