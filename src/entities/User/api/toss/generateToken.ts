@@ -17,6 +17,8 @@ export async function generateToken(authorizationCode: string, referrer: string)
     if (payload.resultType !== "SUCCESS") {
         throw new Error(payload.error?.reason || "토큰 발급 실패");
     }
+
+    console.log("토큰 확인: ", payload);
     return payload.success as TokenResponse;
 }
 

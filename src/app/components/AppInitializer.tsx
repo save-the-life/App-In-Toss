@@ -28,6 +28,7 @@ const AppInitializer: React.FC<AppInitializerProps> = ({ onInitialized }) => {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
+        console.log("Check Toss Login");
         (async () => {
           try {
             const { authorizationCode, referrer } = await requestAuthorizationCode(SCOPES);

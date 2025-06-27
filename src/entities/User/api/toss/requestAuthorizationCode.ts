@@ -3,5 +3,7 @@ export async function requestAuthorizationCode(scopes: string[]) {
   const { authorizationCode, referrer } = await (window as any).AppsInTossModule.authenticate({
     scope: scopes.join(" "),
   });
+  console.log("사용자 인증 코드 확인: ", authorizationCode);
+  console.log("사용자 인증 확인: ", referrer);
   return { authorizationCode, referrer };
 }
