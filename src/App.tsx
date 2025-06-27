@@ -8,27 +8,16 @@ import Audios from "./shared/assets/audio";
 import "./App.css";
 
 // 페이지 컴포넌트들
-import AIMenu from "@/pages/AIMenu";
 import SelectCharacterPage from "./pages/SelectCharacter";
 import DiceEvent from "@/pages/DiceEvent";
-import WalletPage from "@/pages/WalletPage";
 import MissionPage from "@/pages/MissionPage";
 import Reward from "@/pages/RewardPage";
 import InviteFriends from "@/pages/InviteFriends";
 import InviteFriendsList from "./pages/InviteFriendsList";
-import SlotMachine from "@/pages/SlotMachine";
-import PetRegister from "@/pages/PetRegister";
-import SelectPet from "@/pages/SelectPet";
-import EditPet from "@/pages/EditPet";
-import DiagnosisRecords from "@/pages/DiagnosisList";
-import DiagnosisDetail from "@/pages/DiagnosisDetail";
-import AIXrayAnalysis from "@/pages/AIXrayAnalysis";
-import DentalAnalysis from "./pages/AIDentalAnalysis";
 import DiceEventLayout from "./app/layout/DiceEventLayout";
 import MyAssets from "./pages/MyAssets";
 import RewardHistory from "./pages/RewardHistory";
 import PreviousRewards from "@/pages/PreviousRewards";
-import FirstRewardPage from "./pages/FirstReward";
 import SettingsPage from "./pages/SettingsPage";
 import PolicyDetailPage from "./pages/PolicyDetail";
 import FriendRewards from "./pages/FriendRewards";
@@ -162,7 +151,6 @@ const App:React.FC = () =>{
             {/* DiceEventLayout Pages */}
             <Route path="/" element={<Navigate to="/" />} />
             <Route path="/dice-event" element={<DiceEventLayout><DiceEvent /></DiceEventLayout>} />
-            <Route path="/AI-menu" element={<DiceEventLayout><AIMenu /></DiceEventLayout>} />
             <Route path="/mission" element={<DiceEventLayout><MissionPage /></DiceEventLayout>} />
             <Route path="/reward" element={<DiceEventLayout><Reward /></DiceEventLayout>} />
             <Route path="/invite-friends" element={<DiceEventLayout><InviteFriends /></DiceEventLayout>} />
@@ -171,15 +159,7 @@ const App:React.FC = () =>{
 
             {/* Hidden Pages */}
             <Route path="/choose-character" element={<DiceEventLayout hidden={true}><SelectCharacterPage /></DiceEventLayout>} />
-            <Route path="/select-pet" element={<DiceEventLayout hidden={true}><SelectPet /></DiceEventLayout>} />
-            <Route path="/regist-pet" element={<DiceEventLayout hidden={true}><PetRegister /></DiceEventLayout>} />
-            <Route path="/edit-pet" element={<DiceEventLayout hidden={true}><EditPet /></DiceEventLayout>} />
-            <Route path="/diagnosis-list" element={<DiceEventLayout hidden={true}><DiagnosisRecords /></DiceEventLayout>} />
-            <Route path="/diagnosis-detail" element={<DiceEventLayout hidden={true}><DiagnosisDetail /></DiceEventLayout>} />
-            <Route path="/ai-xray-analysis" element={<DiceEventLayout hidden={true}><AIXrayAnalysis /></DiceEventLayout>} />
-            <Route path="/ai-dental-analysis" element={<DiceEventLayout hidden={true}><DentalAnalysis /></DiceEventLayout>} />
             <Route path="/reward-history" element={<DiceEventLayout hidden={true}><RewardHistory /></DiceEventLayout>} />
-            <Route path="/first-reward" element={<DiceEventLayout hidden={true}><FirstRewardPage /></DiceEventLayout>} />
             <Route path="/settings" element={<DiceEventLayout hidden={true}><SettingsPage /></DiceEventLayout>} />
             <Route path="/policy-detail" element={<DiceEventLayout hidden={true}><PolicyDetailPage /></DiceEventLayout>} />
             <Route path="/referral-rewards" element={<DiceEventLayout hidden={true}><FriendRewards /></DiceEventLayout>} />
