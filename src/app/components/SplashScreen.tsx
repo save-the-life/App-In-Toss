@@ -5,7 +5,7 @@ import Images from '@/shared/assets/images';
 const SplashScreen: React.FC = () => {
   return (
     <div
-      className="relative w-full h-screen flex flex-col justify-center items-center bg-cover bg-center"
+      className="relative w-screen h-screen flex flex-col justify-center items-center bg-cover bg-center"
       style={{
           backgroundImage: `url(${Images.SplashBackground})`,
       }}
