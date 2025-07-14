@@ -18,7 +18,7 @@ import { preloadImages } from "@/shared/utils/preloadImages";
 import { useTranslation, Trans } from "react-i18next";
 import { useSound } from "@/shared/provider/SoundProvider";
 import Audios from "@/shared/assets/audio";
-import Attendance from "@/widgets/Attendance";
+// import Attendance from "@/widgets/Attendance";
 
 interface OneTimeMissionCardProps {
   mission: Mission;
@@ -294,12 +294,12 @@ const MissionPage: React.FC = () => {
       )}
 
       {/* 출석 위젯 */}
-      <h1 className="font-semibold text-lg ml-7">
+      {/* <h1 className="font-semibold text-lg ml-7">
         {t("dice_event.attendance")}
       </h1>
       <div className="mx-6">
         <Attendance />
-      </div>
+      </div> */}
 
       {/* 미완료 미션 */}
       {incompleteMissions.length > 0 && (
