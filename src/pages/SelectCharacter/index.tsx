@@ -2,11 +2,9 @@ import React from 'react';
 import SelectCharacter from './SelectCharacter';
 import chooseCharacter from '@/entities/User/api/chooseCharacter';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from "react-i18next";
 
 const SelectCharacterPage: React.FC = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
   const [selectedPet, setSelectedPet] = React.useState<'DOG' | 'CAT'>('DOG');
   
   const handleCharacterSelect = async () => {
@@ -38,7 +36,7 @@ const SelectCharacterPage: React.FC = () => {
             disabled={!selectedPet}
             onClick={handleCharacterSelect}
             >
-            {t("character_page.Continue")}
+            계속하기
           </button>
         </div>
     </div>

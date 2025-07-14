@@ -4,7 +4,7 @@ import UserLevel from "@/entities/User/components/UserLevel";
 import "@/features/DiceEvent/DiceEvent.css";
 import Images from "@/shared/assets/images";
 import { MonthlyPrize } from "@/entities/MonthlyPrize";
-import Attendance from "@/widgets/Attendance";
+// import Attendance from "@/widgets/Attendance";
 import MyRankingWidget from "@/widgets/MyRanking/MyRankingWidget";
 import MissionWidget from "@/widgets/MissionWidget/MissionWidget";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +21,6 @@ import LevelRewards from "@/widgets/LevelRewards";
 import LeaderBoard from "@/widgets/LeaderBoard";
 import { HiX } from "react-icons/hi";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { useTranslation } from "react-i18next";
 import { useSound } from "@/shared/provider/SoundProvider";
 import Audios from "@/shared/assets/audio";
 import getRewardPoints from "@/entities/Mission/api/fromRewardPoint";
@@ -81,7 +80,6 @@ const DiceEventPage: React.FC = () => {
   const [initialX, setInitialX] = useState<number>(140);
   const [initialY, setInitialY] = useState<number>(474);
   const [delta, setDelta] = useState<number>(56);
-  const { t } = useTranslation();
   const navigate = useNavigate();
 
 
@@ -411,7 +409,7 @@ const DiceEventPage: React.FC = () => {
                 />
                 <div className="flex flex-row items-center justify-center w-full px-4 gap-2 mt-2">
                   <p className="font-semibold text-center text-sm md:text-sm text-white">
-                    {t("dice_event.shop_item")}
+                    랭킹 부스터 상점
                   </p>
                 </div>
             </div>
@@ -445,7 +443,7 @@ const DiceEventPage: React.FC = () => {
                   alt="airplane"
                   className="h-20 md:h-28"
                 />
-                {t("dice_event.select_tile")}
+                이동할 칸을 선택하세요
               </div>
             </div>
           )}
@@ -526,7 +524,7 @@ const DiceEventPage: React.FC = () => {
               <div className="flex flex-col items-center justify-around">
                 <div className=" flex flex-col items-center gap-2">
                   <h1 className=" font-jalnan text-5xl text-[#FDE047]">
-                    {t("dice_event.level_up")}
+                    레벨 업
                   </h1>
                   <img
                     src={getLevelEffectImageSrc()}
@@ -535,7 +533,7 @@ const DiceEventPage: React.FC = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-6">
-                  <p className="font-jalnan text-center">{t("dice_event.grap_prize")}</p>
+                  <p className="font-jalnan text-center">보상을 받아가세요!</p>
                   {currentReward && (
                     <div className="flex flex-row items-center gap-2">
                       <div className="box-bg rounded-xl w-16 h-16 border-2 border-[#2660f4] flex flex-col items-center gap-2 justify-center ">
@@ -569,7 +567,7 @@ const DiceEventPage: React.FC = () => {
                   onClick={() => setShowLevelUpDialog(false)}
                   className="bg-[#0147E5] font-medium rounded-full w-40 h-14"
                 >
-                  {t("character_page.Continue")}
+                  계속하기
                 </button>
               </div>
             </DialogContent>
@@ -632,34 +630,34 @@ const DiceEventPage: React.FC = () => {
               <div className="flex flex-col items-center justify-around">
                 <div className=" flex flex-col items-center gap-2">
                   <h1 className=" font-bold text-xl  text-center">
-                    {t("dice_event.account_suspended")}
+                    계정 정지됨
                   </h1>
                 </div>
                 <div className="flex flex-col mt-5">
                   <p className="font-Pretendard text-center text-base font-semibold">
-                    {t("dice_event.fair_play")}<br/>
-                    {t("dice_event.mistake")}
+                    귀하의 계정은 공정한 게임 이용 정책 위반으로 현재 정지 상태입니다.<br/>
+                    이 조치가 실수라고 생각되시면, 지원팀에 문의해 주세요.
                   </p>
                 </div>
                 
                 <div className="flex flex-col mt-2">
                   <p className="font-Pretendard text-center text-sm font-semibold text-[#DD2726]">
-                    {t("dice_event.reason")}
+                    사유: 게임의 부적절한 사용 또는 불공정한 플레이가 감지되었습니다.
                   </p>
                 </div>
 
                 
                 <div className="flex flex-col mt-2">
                   <p className="font-Pretendard text-center text-sm font-normal text-[#A3A3A3]">
-                    {t("dice_event.if_error")}<br/>
-                    {t("dice_event.contact_team")}
+                    만약 이 조치가 오류라고 생각된다면,<br/>
+                    지원팀에 문의해 주세요.
                   </p>
                 </div>
                 <button
                   onClick={() => setSuspend(false)}
                   className="bg-[#0147E5] text-base font-medium rounded-full w-40 h-14 mt-8 mb-7"
                 >
-                  {t("agree_page.close")}
+                  닫기
                 </button>
               </div>
             </DialogContent>
@@ -683,7 +681,7 @@ const DiceEventPage: React.FC = () => {
               <div className="flex flex-col items-center justify-around">
                 <div className=" flex flex-col items-center gap-2">
                   <h1 className=" font-Pretendard text-base font-semibold text-white text-center">
-                    {t("dice_event.claim_point")}
+                    포인트 보상을 받으세요.
                   </h1>
                   <img
                     src={Images.urlReward}
@@ -698,7 +696,7 @@ const DiceEventPage: React.FC = () => {
                   }}
                   className="bg-[#0147E5] text-base font-medium rounded-full w-40 h-14 mt-8 mb-7"
                 >
-                  {t("dice_event.claim")}
+                  지금 받기
                 </button>
               </div>
             </DialogContent>
@@ -763,7 +761,7 @@ const DiceEventPage: React.FC = () => {
           </Dialog> */}
 
           {/* 출석 체크 알림 다이얼로그 */}
-          <Dialog open={redirect}>
+          {/* <Dialog open={redirect}>
             <DialogTitle></DialogTitle>
             <DialogContent className=" bg-[#21212F] border-none rounded-3xl text-white h-svh overflow-x-hidden font-semibold overflow-y-auto max-w-[90%] md:max-w-lg max-h-[30%]">
               <div className="relative">
@@ -795,7 +793,7 @@ const DiceEventPage: React.FC = () => {
                 </button>
               </div>
             </DialogContent>
-          </Dialog>
+          </Dialog> */}
 
           <br />
           <br />

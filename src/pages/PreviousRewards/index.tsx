@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { TopTitle } from "@/shared/components/ui";
-import { useTranslation } from "react-i18next";
 import "./PreviousRewards.css";
 import { useSound } from "@/shared/provider/SoundProvider";
 import Audios from "@/shared/assets/audio";
@@ -55,7 +54,6 @@ interface RewardData {
 }
 
 const PreviousRewards: React.FC = () => {
-  const { t } = useTranslation();
   // -----------------------------
   // 1) Ranking 관련 Zustand
   // -----------------------------
@@ -310,7 +308,7 @@ const PreviousRewards: React.FC = () => {
   // -----------------------------
   return (
     <div className="flex flex-col mb-44 text-white items-center w-full min-h-screen">
-      <TopTitle title={t("reward_page.last_month")} className="px-6" back={true} />
+      <TopTitle title={"지난 달 보상"} className="px-6" back={true} />
 
       {/* 보상 선택 다이얼로그 (랭킹 or 래플) */}
       <RewardSelectionDialog
@@ -340,7 +338,7 @@ const PreviousRewards: React.FC = () => {
               data-[state=active]:text-white font-normal data-[state=active]:font-semibold
               text-lg transition-colors border-b-2 border-transparent duration-300 ease-in-out"
           >
-            {t("reward_page.ranking_tap")}
+            랭킹 탭
           </TabsTrigger>
 
           {/* 2. Raffle 탭 */}
@@ -352,7 +350,7 @@ const PreviousRewards: React.FC = () => {
               data-[state=active]:text-white font-normal data-[state=active]:font-semibold
               text-lg transition-colors border-b-2 border-transparent duration-300 ease-in-out"
           >
-            {t("reward_page.raffle_tap")}
+            래플 탭
           </TabsTrigger>
 
           {/* 3. Airdrop 탭 */}
@@ -364,7 +362,7 @@ const PreviousRewards: React.FC = () => {
               data-[state=active]:text-white font-normal data-[state=active]:font-semibold
               text-lg transition-colors border-b-2 border-transparent duration-300 ease-in-out"
           >
-            {t("reward_page.air_drop_tap")}
+            에어드랍 탭
           </TabsTrigger>
         </TabsList>
 

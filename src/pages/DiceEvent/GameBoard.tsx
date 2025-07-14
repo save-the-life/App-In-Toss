@@ -27,7 +27,6 @@ import { PiSpinnerBallFill } from "react-icons/pi";
 import { formatNumber } from "@/shared/utils/formatNumber";
 import { FaBookTanakh  } from "react-icons/fa6";
 import { useTour } from "@reactour/tour";
-import { useTranslation } from "react-i18next";
 import { useSound } from "@/shared/provider/SoundProvider";
 import Audios from "@/shared/assets/audio";
 import { HiVolumeOff, HiVolumeUp } from "react-icons/hi";
@@ -491,9 +490,6 @@ const GameBoard: React.FC<GameBoardProps> = ({
     }
   };
 
-  
-  const { t } = useTranslation();
-
   return (
     <div className="grid grid-cols-6 grid-rows-6 gap-1 text-xs md:text-base relative">
       {/* 에러 메시지 표시 */}
@@ -662,27 +658,27 @@ const GameBoard: React.FC<GameBoardProps> = ({
             </DialogTrigger>
             <DialogContent className=" bg-[#21212F] border-none rounded-3xl text-white h-svh md:h-auto overflow-y-auto max-w-[90%] md:max-w-lg max-h-[80%]">
               <DialogHeader className="">
-                <DialogTitle>{t("dice_event.inventory")}</DialogTitle>
+                <DialogTitle>현재 인벤토리</DialogTitle>
               </DialogHeader>
               <div className="flex flex-col mt-4 gap-4">
                 <div className="flex flex-col bg-[#1F1E27] p-5 rounded-3xl border-2 border-[#35383F] font-medium gap-2">
                   <div className="flex flex-row items-center gap-2">
                     <IoGameController className="w-6 h-6" />
-                    <p>{t("dice_event.points")} : x{items.boardRewardTimes}</p>
+                    <p>게임보드 포인트: x{items.boardRewardTimes}</p>
                   </div>
                   <div className="flex flex-row items-center gap-2">
                     <IoTicket className="w-6 h-6" />
-                    <p>{t("dice_event.tickets")} : x{items.ticketTimes}</p>
+                    <p>추첨 티켓: x{items.ticketTimes}</p>
                   </div>
                   <div className="flex flex-row items-center gap-2">
                     <PiSpinnerBallFill className="w-6 h-6" />
-                    <p>{t("dice_event.spin")}: x{items.spinTimes}</p>
+                    <p>스핀 보상: x{items.spinTimes}</p>
                   </div>
                 </div>
                 <div className="flex flex-row items-center justify-end gap-1">
                   <AiOutlineInfoCircle className=" w-5 h-5" />
                   <p className="text-end text-sm font-medium">
-                    {t("dice_event.additive")}
+                    ITEM 보상 배율은 추가적으로 적용됩니다.
                   </p>
                 </div>
                 <NFTRewardList />
@@ -845,7 +841,7 @@ const GameBoard: React.FC<GameBoardProps> = ({
               }}
             >
               <BsDice5Fill className="w-3 h-3" />
-              <p>: {t("dice_event.refill")}</p>
+              <p>: 리필하기</p>
             </motion.div>
           ) : (
             <>

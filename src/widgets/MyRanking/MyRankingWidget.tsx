@@ -5,7 +5,6 @@ import { useUserStore } from '@/entities/User/model/userModel';
 import CountUp from 'react-countup';
 import { IoIosArrowRoundUp, IoIosArrowRoundDown } from 'react-icons/io';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
 
 interface MyRankingWidgetProps {
   titleHidden?: boolean;
@@ -31,7 +30,6 @@ const MyRankingWidget: React.FC<MyRankingWidgetProps> = ({
     fetchLeaderTab();
   }, []);
 
-  const { t } = useTranslation();
 
   // 2) 애니메이션 트리거 state
   const [showRankText, setShowRankText] = useState<'myRank' | 'rankUp' | 'rankDown'>('myRank');
@@ -137,12 +135,12 @@ const MyRankingWidget: React.FC<MyRankingWidgetProps> = ({
   return (
     <div className={`flex flex-col items-center justify-center text-white cursor-pointer w-full ${className}`} role="button">
       {/* Title */}
-      <h1 className={`font-jalnan text-3xl ${titleHidden ? 'hidden' : 'block'}`}>{t('dice_event.my_rank')}</h1>
+      <h1 className={`font-jalnan text-3xl ${titleHidden ? 'hidden' : 'block'}`}>나의 랭킹</h1>
 
       <div className={`bg-box px-8 w-full h-24 md:h-32 flex font-semibold ${titleHidden ? 'mt-0' : 'mt-4'}`}>
         {/* Rank text & number */}
         <div className="relative w-[121px] h-full flex flex-col items-center justify-center gap-2">
-          <p className="text-base font-semibold invisible">{t('dice_event.my_rank')}</p>
+          <p className="text-base font-semibold invisible">나의 랭킹</p>
           <div className="absolute top-[18%] md:top-[24%] w-full flex items-center justify-center">
             <AnimatePresence mode="wait">
               {showRankText === 'myRank' && <motion.p key="my" variants={myVar} initial="initial" animate="animate" exit="exit" className="text-base font-semibold">{t('dice_event.my_rank')}</motion.p>}
@@ -182,7 +180,7 @@ const MyRankingWidget: React.FC<MyRankingWidgetProps> = ({
       </div>
 
       {/* Footer text */}
-      <p className="w-full font-medium text-xs md:text-sm mt-2 px-2">* {t('dice_event.ranking_base')}</p>
+      <p className="w-full font-medium text-xs md:text-sm mt-2 px-2">* 랭킹은 스타 포인트를 기준으로 합니다</p>
     </div>
   );
 };

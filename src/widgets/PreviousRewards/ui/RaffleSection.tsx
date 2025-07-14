@@ -17,7 +17,6 @@ import "swiper/css";
 import "swiper/css/pagination";
 import LoadingSpinner from "@/shared/components/ui/loadingSpinner";
 import ErrorMessage from "@/shared/components/ui/ErrorMessage";
-import { useTranslation } from "react-i18next";
 
 import { useRaffleEntityStore } from "@/entities/PreviousRewards/model/raffleEntityModel";
 import { useRaffleUSDTEntityStore } from "@/entities/PreviousRewards/model/raffleUSDTEntityModel";
@@ -51,7 +50,6 @@ const RaffleSection: React.FC<RaffleSectionProps> = ({
   raffleRangeError,
   handleRangeClick,
 }) => {
-  const { t } = useTranslation();
 
   // SL store
   const {
@@ -103,7 +101,7 @@ const RaffleSection: React.FC<RaffleSectionProps> = ({
   if (error) {
     return (
       <div className="text-center text-red-500">
-        {t("error")}: {error}
+        오류: {error}
       </div>
     );
   }
@@ -205,8 +203,8 @@ const RaffleSection: React.FC<RaffleSectionProps> = ({
       ) : (
         <div className="relative flex flex-col box-bg rounded-3xl border-2 border-[#0147E5] p-5 h-full justify-center mb-4">
           <p className="font-semibold text-sm text-center">
-            {t("reward_page.better_luck")} <br />
-            {t("reward_page.next_raffle")}
+            다음 기회에 행운을 빕니다!<br />
+            다음 추첨에 도전해보세요!
           </p>
         </div>
       )}
@@ -215,7 +213,7 @@ const RaffleSection: React.FC<RaffleSectionProps> = ({
       {selectedTab === "USDT" && (
         <div className="space-y-2">
           {usdtRanks.length === 0 ? (
-            <p className="text-center text-sm">{t("reward_page.no_ranking")}</p>
+            <p className="text-center text-sm">랭킹 정보가 없습니다.</p>
           ) : (
             usdtRanks.map((item) => (
               <div key={item.rank} className="flex items-center p-4 border-b gap-2">
@@ -237,7 +235,7 @@ const RaffleSection: React.FC<RaffleSectionProps> = ({
         <>
           <div className="space-y-2">
             {inlineSl.length === 0 ? (
-              <p className="text-center text-sm">{t("reward_page.no_ranking")}</p>
+              <p className="text-center text-sm">랭킹 정보가 없습니다.</p>
             ) : (
               inlineSl.map((item) => (
                 <div key={item.rank} className="flex items-center p-4 border-b gap-2">

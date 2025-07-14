@@ -10,7 +10,6 @@ import { useRPSGameStore } from "./store";
 import { useUserStore } from "@/entities/User/model/userModel";
 import LoadingSpinner from "@/shared/components/ui/loadingSpinner"; // ★ 로딩 스피너
 import { preloadImages } from "@/shared/utils/preloadImages"; // ★ 이미지 프리로딩 함수
-import { useTranslation } from "react-i18next";
 import { useSound } from "@/shared/provider/SoundProvider";
 import Audios from "@/shared/assets/audio";
 
@@ -47,7 +46,6 @@ const RPSGame: React.FC<RPSGameProps> = ({ onGameEnd, onCancel }) => {
     Images.Star,
     // 혹시 RPSGameStart, RPSResultDialog 등에서 추가로 쓰는 이미지도 여기 포함
   ];
-  const { t } = useTranslation();
 
   // -----------------------
   // 이미지 프리로드

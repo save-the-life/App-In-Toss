@@ -4,7 +4,6 @@ import React from "react";
 import Images from "@/shared/assets/images";
 import LoadingSpinner from "@/shared/components/ui/loadingSpinner";
 import ErrorMessage from "@/shared/components/ui/ErrorMessage";
-import { useTranslation } from "react-i18next";
 
 
 
@@ -47,7 +46,6 @@ const AirdropSection: React.FC<AirdropSectionProps> = ({
   isLoadingAirdrop,
   errorAirdrop,
 }) => {
-  const { t } = useTranslation();
   // 1) 로딩 중이면 스피너 노출
   if (isLoadingAirdrop) {
     return (
@@ -72,8 +70,8 @@ const AirdropSection: React.FC<AirdropSectionProps> = ({
       <div className="p-6 bg-[#0D1226] text-white w-full h-svh">
         <div className="relative flex flex-col box-bg rounded-3xl border-2 border-[#0147E5] p-5 h-24 justify-center items-center">
           <p className="font-semibold text-sm text-center">
-            {t("reward_page.no_airdrop")} <br />
-            {t("reward_page.better_luck")}
+            지난달에는 에어드롭이 없었습니다.<br />
+            다음 기회에 행운을 빕니다!
           </p>
         </div>
       </div>
@@ -95,18 +93,18 @@ const AirdropSection: React.FC<AirdropSectionProps> = ({
           // rank가 null이 아닌 경우 (당첨)
           <div className="relative flex flex-col box-bg rounded-3xl border-2 border-[#0147E5] p-5 gap-2">
             <p className="font-semibold text-center text-lg">
-              {t('reward_page.congratulations')}
+              축하합니다!
             </p>
-            <p className="text-center text-sm">
+            {/* <p className="text-center text-sm">
               {t('reward_page.airdrop_message', { slRewards, rank })}
-            </p>
+            </p> */}
           </div>
         ) : (
           // rank가 null인 경우 (미당첨)
           <div className="relative flex flex-col box-bg rounded-3xl border-2 border-[#0147E5] p-5 h-full justify-center items-center">
             <p className="font-semibold text-sm text-center">
-              {t("reward_page.you_didnt_airdrop")} <br />
-              {t("reward_page.better_luck")}
+              이번에는 에어드롭에 당첨되지 않았습니다. <br />
+              다음 기회에 행운을 빕니다!
             </p>
           </div>
         )
@@ -118,7 +116,7 @@ const AirdropSection: React.FC<AirdropSectionProps> = ({
       {/* 당첨자 목록 (최대 16명) */}
       {winners.length > 0 && (
         <div className="flex flex-col mt-8">
-          <p className="font-semibold">{t("reward_page.air_drop_winner")}</p>
+          <p className="font-semibold">에어드롭 당첨자</p>
           {winners.map((w) => (
             <div
               key={w.rank}

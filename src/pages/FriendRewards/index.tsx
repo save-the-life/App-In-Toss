@@ -4,7 +4,6 @@ import DatePicker from "react-datepicker";
 import { format } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import { FaCalendarAlt } from "react-icons/fa";
-import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { TopTitle } from "@/shared/components/ui";
 import { useSound } from "@/shared/provider/SoundProvider";
@@ -14,7 +13,6 @@ import getFriendsList from "@/entities/RewardPage/api/friendsList";
 import getReferralDetail from "@/entities/RewardPage/api/referralRewards";
 
 const FriendRewards: React.FC = () => {
-  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const { playSfx } = useSound();
 
@@ -156,7 +154,7 @@ const FriendRewards: React.FC = () => {
   
   return (
     <div className="flex flex-col text-white mb-32 px-6 min-h-screen">
-      <TopTitle title={t("reward_page.ref_reward")} back={true} />
+      <TopTitle title={"친구 초대 보상"} back={true} />
 
       {/* 드롭다운 필터 */}
       <div>
@@ -167,7 +165,7 @@ const FriendRewards: React.FC = () => {
             setIsOpen(!isOpen);
           }}>
           <div className="flex items-center">
-            <p className="text-lg font-semibold">{t("reward_page.filter")}</p>
+            <p className="text-lg font-semibold">필터 옵션</p>
           </div>
           {isOpen ? (
             <FaCaretUp className="text-lg" />
@@ -184,11 +182,11 @@ const FriendRewards: React.FC = () => {
         >
           <div className="mt-4 mx-3">
             {/* 친구 이름 검색 */}
-            <p className="text-lg font-medium text-left mb-2">{t("reward_page.search")}</p>
+            <p className="text-lg font-medium text-left mb-2">검색</p>
             <div className="relative w-full mb-4">
               <input
                 type="text"
-                placeholder={t("reward_page.name")}
+                placeholder={"이름 검색..."}
                 value={searchText}
                 onChange={(e) => handleSearch(e.target.value)}
                 className="w-full h-14 px-4 py-2 pr-14 bg-[#1F1E27] border-[#35383F] border-2 text-white text-center rounded-full focus:outline-none focus:ring focus:ring-blue-500"
@@ -222,7 +220,7 @@ const FriendRewards: React.FC = () => {
             </div>
 
             {/* 자산 종류 필터 (하나만 선택) */}
-            <p className="text-lg font-medium text-left mb-2">{t("reward_page.type")}</p>
+            <p className="text-lg font-medium text-left mb-2">자산 유형</p>
             <div className="flex flex-col gap-2 ml-3">
               {["USDT", "SL", "Point"].map((asset) => (
                 <label
@@ -244,7 +242,7 @@ const FriendRewards: React.FC = () => {
             </div>
 
             {/* 날짜 범위 선정 */}
-            <p className="text-lg font-medium text-left mt-4">{t("reward_page.range")}</p>
+            <p className="text-lg font-medium text-left mt-4">날짜 범위</p>
             <div className="flex items-center gap-4 mt-4">
               {/* 시작일 */}
               <div className="w-full">
@@ -303,7 +301,7 @@ const FriendRewards: React.FC = () => {
           ))
         ) : (
           <p className="text-center text-lg font-semibold text-gray-400">
-            {t("reward_page.no_record")}
+            기록이 없습니다.
           </p>
         )}
       </div>

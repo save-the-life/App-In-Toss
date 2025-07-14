@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Images from '@/shared/assets/images';
-import { useTranslation } from "react-i18next";
 import { useSound } from "@/shared/provider/SoundProvider";
 import Audios from "@/shared/assets/audio";
 
@@ -13,7 +12,6 @@ interface SelectCharacterProps {
 }
 
 const SelectCharacter: React.FC<SelectCharacterProps> = ({ selectedPet, setSelectedPet }) => {
-  const { t } = useTranslation();
   const { playSfx } = useSound();
   
   React.useEffect(() => {
@@ -34,7 +32,7 @@ const SelectCharacter: React.FC<SelectCharacterProps> = ({ selectedPet, setSelec
       <h2 className="font-semibold text-xl text-center mt-32">
         Lucky Dice!
         <br />
-        {t("character_page.Choose_your_character!")}
+        캐릭터를 선택하세요!
       </h2>
       <div className="flex flex-row mt-14 gap-3">
         <div

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from 'react-i18next';
 import { TopTitle } from '@/shared/components/ui';
 import LoadingSpinner from '@/shared/components/ui/loadingSpinner';
 import Images from '@/shared/assets/images';
@@ -16,7 +15,6 @@ interface Friend {
 
 const InviteFriendsList: React.FC = () => {
     const navigate = useNavigate();
-    const { t } = useTranslation();
     const { playSfx } = useSound();
     const [friends, setFriends] = useState<Friend[]>([]); // 친구 목록 상태
     const [loading, setLoading] = useState<boolean>(true); // 로딩 상태
@@ -60,12 +58,12 @@ const InviteFriendsList: React.FC = () => {
     return (
         <div className="flex flex-col items-center text-white mx-6 relative min-h-screen pb-32">
             {/* 상단 타이틀 */}
-            <TopTitle title={t("mission_page.friend_list")} back={true} />
+            <TopTitle title={"친구 초대 목록"} back={true} />
             
             {/* 레퍼럴 보상 내용 */}
             <div className='w-full'>
                 <div className="flex justify-between items-center">
-                    <h2 className="text-lg font-medium">{t("mission_page.total_reward")}</h2>
+                    <h2 className="text-lg font-medium">총 추천 보상</h2>
                     <button
                         className="flex items-center text-white text-xs font-medium"
                         onClick={() => {
@@ -74,7 +72,7 @@ const InviteFriendsList: React.FC = () => {
                         }}
                         aria-label="View All NFTs"
                         >
-                        {t("mission_page.view_detail")} <FaChevronRight className="ml-1 w-3 h-3" />
+                        상세 보기 <FaChevronRight className="ml-1 w-3 h-3" />
                     </button>
                 </div>
                 <div className="bg-[#1F1E27] rounded-3xl border-2 border-[#35383F] flex flex-col justify-center gap-4 h-36 p-5 mt-3">
@@ -84,26 +82,8 @@ const InviteFriendsList: React.FC = () => {
                             alt="Points Earned"
                             className="w-6 h-6"
                             />
-                        <p className="text-base font-medium flex-1 ml-1">{t("mission_page.points")}</p>
+                        <p className="text-base font-medium flex-1 ml-1">적립된 포인트</p>
                         <p className="text-[#3B82F6] text-lg font-semibold">+{formattedStar}P</p>
-                    </div>
-                    <div className="flex items-center">
-                        <img
-                            src={Images.SLToken}
-                            alt="SL Earned"
-                            className="w-6 h-6"
-                            />
-                        <p className="text-base font-medium flex-1 ml-1">{t("mission_page.sl")}</p>
-                        <p className="text-[#3B82F6] text-lg font-semibold">+{formattedSL}SLT</p>
-                    </div>
-                    <div className="flex items-center">
-                        <img
-                            src={Images.USDT}
-                            alt="USDT Earned"
-                            className="w-6 h-6"
-                            />
-                        <p className="text-base font-medium flex-1 ml-1">{t("mission_page.usdt")}</p>
-                        <p className="text-[#3B82F6] text-lg font-semibold">+{formattedUSDT}USDT</p>
                     </div>
                 </div>
             </div>
@@ -112,7 +92,7 @@ const InviteFriendsList: React.FC = () => {
             {friends.length > 0 ? ( // 친구 목록이 존재하는 경우에만 렌더링
                 <div className="flex flex-col mt-12 w-full gap-3">
                     <div className="flex flex-row justify-between items-center mb-[6px]">
-                        <p className="text-lg font-medium">{t('mission_page.Invited_Friends')}</p>
+                        <p className="text-lg font-medium">초대한 친구</p>
                         <div className="flex items-center justify-center text-sm font-medium w-[72px] h-8 rounded-full bg-[#21212f]">
                             Total : <span className="text-[#FDE047]">{friends.length}</span>
                         </div>
@@ -128,7 +108,7 @@ const InviteFriendsList: React.FC = () => {
                     ))}
                 </div>
             ) : (
-                <p className="text-sm text-gray-400 mt-8">{t("mission_page.invite_your_friend")}</p> // 친구가 없을 경우
+                <p className="text-sm text-gray-400 mt-8">친구를 초대하세요!</p> // 친구가 없을 경우
             )}
         </div>
     );

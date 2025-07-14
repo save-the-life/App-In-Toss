@@ -4,7 +4,6 @@ import { FaChevronRight, FaCaretDown, FaCaretUp } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FaCalendarAlt } from "react-icons/fa";
-import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { TopTitle } from "@/shared/components/ui";
 import { useSound } from "@/shared/provider/SoundProvider";
@@ -16,7 +15,6 @@ import { format } from "date-fns";
 
 const RewardHistory: React.FC = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
   const { playSfx } = useSound();
 
   // 필터 드롭다운 열림 상태
@@ -230,7 +228,7 @@ const RewardHistory: React.FC = () => {
 
   return (
     <div className="flex flex-col text-white mb-32 px-6 min-h-screen">
-      <TopTitle title={t("asset_page.Rewards_History")} back={true} />
+      <TopTitle title={"보상 내역"} back={true} />
 
       {/* 필터 드롭다운 */}
       <div>
@@ -242,7 +240,7 @@ const RewardHistory: React.FC = () => {
           }}
         >
           <div className="flex items-center">
-            <p className="text-lg font-semibold">{t("asset_page.filter_option")}</p>
+            <p className="text-lg font-semibold">필터 옵션</p>
           </div>
           {isOpen ? <FaCaretUp className="w-4 h-4" /> : <FaCaretDown className="w-4 h-4" />}
         </div>
@@ -255,7 +253,7 @@ const RewardHistory: React.FC = () => {
         >
           <div className="mt-4 mx-3">
             {/* 자산 종류 (단일 선택) */}
-            <p className="text-lg font-medium text-left mb-2">{t("asset_page.asset_types")}</p>
+            <p className="text-lg font-medium text-left mb-2">자산 타입</p>
             <div className="flex flex-col gap-2 ml-3">
               {["전체", "SL", "USDT", "STAR"].map((asset) => (
                 <label key={asset} className="flex items-center text-base font-medium">
@@ -268,16 +266,16 @@ const RewardHistory: React.FC = () => {
                     className="mr-2"
                   />
                   {asset === "전체"
-                    ? t("asset_page.all")
+                    ? "전체"
                     : asset === "STAR"
-                    ? t("asset_page.point")
+                    ? "스타 포인트"
                     : asset}
                 </label>
               ))}
             </div>
 
             {/* 증감 필터 (단일 선택) */}
-            <p className="text-lg font-medium text-left mt-4 mb-2">{t("asset_page.change_types")}</p>
+            <p className="text-lg font-medium text-left mt-4 mb-2">거래 타입</p>
             <div className="flex flex-col gap-2 ml-3">
               {["전체", "INCREASE", "DECREASE"].map((change) => (
                 <label key={change} className="flex items-center text-base font-medium">
@@ -289,14 +287,15 @@ const RewardHistory: React.FC = () => {
                     onChange={() => handleChangeType(change)}
                     className="mr-2"
                   />
-                  {change === "전체" ? t("asset_page.all") : t(`asset_page.${change.toLowerCase()}`)}
+                  전체
+                  {/* {change === "전체" ? "전체" : t(`asset_page.${change.toLowerCase()}`)} */}
                 </label>
               ))}
             </div>
 
             {/* 날짜 범위 선정 */}
             <div className="flex justify-between items-center mt-4">
-              <p className="text-lg font-medium">{t("asset_page.date_ranges")}</p>
+              <p className="text-lg font-medium">날짜 범위</p>
               <button
                 className="text-sm text-blue-500 hover:underline"
                 onClick={() => {
@@ -305,7 +304,7 @@ const RewardHistory: React.FC = () => {
                   setEndDate(null);
                 }}
               >
-                {t("asset_page.reset_date")}
+                날짜 초기화
               </button>
             </div>
             <div className="flex items-center gap-4 mt-4">
@@ -313,8 +312,8 @@ const RewardHistory: React.FC = () => {
                 <DatePicker
                   selected={startDate}
                   onChange={handleStartDateChange}
-                  placeholderText={t("asset_page.start_date")}
-                  customInput={<CustomDateInput placeholder={t("asset_page.start_date")} />}
+                  placeholderText={"시작일"}
+                  customInput={<CustomDateInput placeholder={"시작일"} />}
                   dateFormat="yyyy-MM-dd"
                   maxDate={endDate || undefined}
                 />
@@ -323,8 +322,8 @@ const RewardHistory: React.FC = () => {
                 <DatePicker
                   selected={endDate}
                   onChange={handleEndDateChange}
-                  placeholderText={t("asset_page.end_date")}
-                  customInput={<CustomDateInput placeholder={t("asset_page.end_date")} />}
+                  placeholderText={"종료일"}
+                  customInput={<CustomDateInput placeholder={"종료일"} />}
                   dateFormat="yyyy-MM-dd"
                   minDate={startDate || undefined}
                 />
@@ -345,7 +344,7 @@ const RewardHistory: React.FC = () => {
               >
                 <div>
                   <p className="text-sm font-medium">
-                    {t(`reward_page.${reward.contentKey}`)}
+                    {/* {t(`reward_page.${reward.contentKey}`)} */}
                   </p>
                   <p className="text-xs text-gray-400">{reward.loggedAt}</p>
                 </div>
@@ -364,7 +363,7 @@ const RewardHistory: React.FC = () => {
               </div>
             ))
           ) : (
-            <p className="text-center text-sm text-gray-400">{t("asset_page.no_records")}</p>
+            <p className="text-center text-sm text-gray-400">기록이 없습니다.</p>
           )}
 
           {/* 더보기 버튼 */}
@@ -374,7 +373,7 @@ const RewardHistory: React.FC = () => {
                 onClick={handleLoadMore}
                 className="px-4 py-2 bg-[#3B82F6] rounded-md text-white font-semibold hover:bg-[#3B82F6]"
               >
-                {t("asset_page.load_more")}
+                더 보기
               </button>
             </div>
           )}

@@ -6,7 +6,6 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { HiX } from 'react-icons/hi';
 import { BiCopy } from 'react-icons/bi';
 import Images from '@/shared/assets/images';
-import { useTranslation } from "react-i18next";
 import { useUserStore } from "@/entities/User/model/userModel";
 import LoadingSpinner from '@/shared/components/ui/loadingSpinner';
 import {
@@ -50,7 +49,6 @@ interface ClaimData {
 
 const MyAssets: React.FC = () => {
     const navigate = useNavigate();
-    const { t } = useTranslation();
     const { playSfx } = useSound();
     const { nickName, userLv, characterType, uid } = useUserStore();
     const [loading, setLoading] = useState(true);
@@ -344,9 +342,9 @@ const MyAssets: React.FC = () => {
                     }}
                     style={{ background: "linear-gradient(to bottom, #19203CB2 0%, #304689 100%)" }}>
                     <div className="pl-3">
-                        <h3 className="text-base font-semibold mb-[6px] whitespace-nowrap">{t("asset_page.Shop_Unique_NFTs_Now!")}</h3>
+                        <h3 className="text-base font-semibold mb-[6px] whitespace-nowrap">지금 바로 아이템을 쇼핑하세요!</h3>
                         <p className="text-sm font-medium text-gray-200">
-                            {t("asset_page.boost_rank")}
+                            강력한 아이템으로 빠르게 랭크를 올리세요!
                         </p>
                     </div>
                     <img
@@ -359,15 +357,15 @@ const MyAssets: React.FC = () => {
                 {/* Non-NFT Items 영역 */}
                 <div className="mt-10 mb-5 w-full">
                     <div className="flex justify-between items-center">
-                        <h2 className="text-lg font-semibold">{t("asset_page.non_nft")}</h2>
+                        <h2 className="text-lg font-semibold">내 아이템</h2>
                     </div>
                     <div className="mt-10 w-full">
                         {nonNftItems.length === 0 ? (
                             <div className="mx-0 w-full h-[150px] flex flex-col items-center justify-center">
                                 <p className="text-center text-[#737373] text-sm font-medium">
-                                    <span className="whitespace-nowrap">{t("asset_page.no_item")}</span>
+                                    <span className="whitespace-nowrap">아직 보유 중인 item이 없습니다.</span>
                                     <br />
-                                    <span className="whitespace-nowrap">{t("asset_page.own_item")}</span>
+                                    <span className="whitespace-nowrap">ITEM을 소유하고 랭크를 올려보세요!</span>
                                 </p>
 
                                 <button
@@ -377,7 +375,7 @@ const MyAssets: React.FC = () => {
                                         playSfx(Audios.button_click);
                                         navigate("/item-store");
                                     }}>
-                                    {t("asset_page.shop_item")}
+                                    ITEM 쇼핑하기
                                 </button>
                             </div>
                         ) : (
@@ -413,7 +411,7 @@ const MyAssets: React.FC = () => {
                                         playSfx(Audios.button_click);
                                         navigate("/item-store");
                                     }}>
-                                    {t("asset_page.shop_item")}
+                                    ITEM 쇼핑하기
                                 </button>
                             </div>
                         )}
@@ -424,14 +422,14 @@ const MyAssets: React.FC = () => {
                 {/* 보상 내역 */}
                 <div className="mt-8 w-full">
                     <div className="flex justify-between items-center">
-                        <h2 className="text-lg font-semibold">{t("asset_page.Rewards_History")}</h2>
+                        <h2 className="text-lg font-semibold">보상 내역</h2>
                         <button
                             className="flex items-center text-white text-xs"
                             onClick={() => {
                                 playSfx(Audios.button_click);
                                 navigate("/reward-history");
                             }}>
-                            {t("asset_page.View_All")} <FaChevronRight className="ml-1 w-2 h-2" />
+                            모두 보기 <FaChevronRight className="ml-1 w-2 h-2" />
                         </button>
                     </div>
                     <div className="mt-4 bg-[#1F1E27] rounded-3xl border-[2px] border-[#35383F] py-3 px-4">
@@ -443,7 +441,7 @@ const MyAssets: React.FC = () => {
                                         index !== displayHistory.length - 1 ? "border-b border-[#35383F]" : ""
                                 }`}>
                                 <div>
-                                    <p className="text-sm font-normal">{t(`reward_page.${reward.contentKey}`)}</p>
+                                        <p className="text-sm font-normal">{ reward.contentKey }</p>
                                     <p className="text-xs font-normal text-[#A3A3A3]">
                                     {formatDate(reward.loggedAt)}
                                     </p>
@@ -459,7 +457,7 @@ const MyAssets: React.FC = () => {
                             ))
                             ) : (
                             <p className="text-center text-sm text-gray-400">
-                                {t("asset_page.no_records") || "No records found"}
+                                No records found
                             </p>
                         )}
                     </div>
@@ -470,14 +468,14 @@ const MyAssets: React.FC = () => {
                 {showModal && (
                     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 w-full">
                         <div className="bg-white text-black p-6 rounded-lg text-center w-[70%] max-w-[550px]">
-                            <p>{t("asset_page.prepare_service")}</p>
+                            <p>서비스를 준비 중입니다</p>
                             <button
                                 className="mt-4 px-4 py-2 bg-[#0147E5] text-white rounded-lg"
                                 onClick={() => {
                                     playSfx(Audios.button_click);
                                     setShowModal(false);
                                 }}>
-                                {t("OK")}
+                                확인
                             </button>
                         </div>
                     </div>
@@ -487,14 +485,14 @@ const MyAssets: React.FC = () => {
                 {copySuccess && (
                     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 w-full">
                         <div className="bg-white text-black p-6 rounded-lg text-center w-[70%] max-w-[550px]">
-                            <p>{t("asset_page.uid")}</p>
+                            <p>UID가 클립보드에 복사되었습니다.</p>
                             <button
                                 className="mt-4 px-4 py-2 bg-[#0147E5] text-white rounded-lg"
                                 onClick={() => {
                                     playSfx(Audios.button_click);
                                     setCopySuccess(false);
                                 }}>
-                                {t("OK")}
+                                확인
                             </button>
                         </div>
                     </div>

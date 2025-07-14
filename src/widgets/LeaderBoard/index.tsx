@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useLeaderboardStore } from '@/entities/Leaderboard/model/leaderboardModel';
-import { useTranslation } from "react-i18next";
 import LoadingSpinner from '@/shared/components/ui/loadingSpinner';
 import { LeaderBoardEntry } from '@/entities/Leaderboard/types';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -15,7 +14,6 @@ const Leaderboard: React.FC = () => {
     fetchLeaderboard,
     fetchNextPage,
   } = useLeaderboardStore();
-  const { t } = useTranslation();
 
   useEffect(() => {
     fetchLeaderboard();
@@ -45,7 +43,7 @@ const Leaderboard: React.FC = () => {
 
   return (
     <div className="leaderboard-container flex flex-col md:px-0 text-white mb-44 w-full mt-7">
-      <h1 className="font-jalnan text-3xl mb-6 text-center">{t("rank_page.Leader_Board")}</h1>
+      <h1 className="font-jalnan text-3xl mb-6 text-center">리더 보드</h1>
 
       {/* Top 3 Leader Board Entries */}
       <div className="top-leaders flex flex-col gap-3 w-full justify-center items-center">

@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 import { AlertDialog, AlertDialogContent } from "@/shared/components/ui";
 import Images from "@/shared/assets/images";
 import { formatNumber } from "@/shared/utils/formatNumber";
-import { useTranslation } from "react-i18next";
 import { useSound } from "@/shared/provider/SoundProvider";
 import Audios from "@/shared/assets/audio";
 
@@ -29,7 +28,6 @@ const ResultWin: React.FC<ResultWinProps> = ({
   winMultiplier,
 }) => {
   const isFinalWin = consecutiveWins >= 3;
-  const { t } = useTranslation();
   const { playSfx } = useSound();
 
   // 승리 효과음 재생
@@ -53,14 +51,14 @@ const ResultWin: React.FC<ResultWinProps> = ({
         </div>
         {isFinalWin ? (
           <div className="font-jalnan text-[24px] text-center">
-            {t("dice_event.rps_game.congrate")}
+            축하합니다!
             <br />
-            {t("dice_event.rps_game.27x")}
+            베팅 금액의 27배를 획득하셨습니다!
           </div>
         ) : (
           <div className="font-jalnan text-[30px] text-center">
             <div className="flex flex-col justify-center items-center">
-              {t("dice_event.rps_game.continue_with")} <br />
+              계속하시겠습니까? <br />
               <div className="flex flex-row items-center justify-center">
                 <div className="flex flex-row items-center justify-center font-semibold text-base w-12 h-8 bg-[#21212F] rounded-full">
                   <p>x{winMultiplier}</p>
@@ -76,7 +74,7 @@ const ResultWin: React.FC<ResultWinProps> = ({
               className="rounded-full h-14 w-32 bg-[#21212f] text-white font-medium"
               onClick={onQuit}
             >
-              {t("dice_event.rps_game.finish")}
+              완료
             </button>
           ) : (
             <>
@@ -84,13 +82,13 @@ const ResultWin: React.FC<ResultWinProps> = ({
                 className="rounded-full h-14 w-32 bg-gray-200 text-[#171717] font-medium"
                 onClick={onQuit}
               >
-                {t("dice_event.rps_game.collect")}
+                수령
               </button>
               <button
                 className="rounded-full h-14 w-32 bg-[#21212f] text-white font-medium"
                 onClick={onContinue}
               >
-                {t("dice_event.rps_game.gamble")}
+                도전
               </button>
             </>
           )}
@@ -101,7 +99,6 @@ const ResultWin: React.FC<ResultWinProps> = ({
 };
 
 const ResultLose: React.FC<ResultLoseProps> = ({ winnings, onQuit }) => {
-  const { t } = useTranslation();
   const { playSfx } = useSound();
 
   // 패배 효과음 재생
@@ -125,8 +122,8 @@ const ResultLose: React.FC<ResultLoseProps> = ({ winnings, onQuit }) => {
         </div>
         <div className="font-jalnan text-[20px] text-center">
           <p>
-            {t("dice_event.rps_game.better_luck")} <br />
-            {t("dice_event.rps_game.next_time")}
+            더 좋은 운을 빕니다!<br />
+            다음 기회에!
           </p>
         </div>
 
@@ -134,7 +131,7 @@ const ResultLose: React.FC<ResultLoseProps> = ({ winnings, onQuit }) => {
           className="rounded-full h-14 w-32 bg-[#21212f] text-white font-medium"
           onClick={onQuit}
         >
-          {t("dice_event.rps_game.quit")}
+          그만두기
         </button>
       </div>
     </div>

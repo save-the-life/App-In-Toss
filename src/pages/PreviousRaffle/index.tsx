@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { TopTitle } from "@/shared/components/ui";
-import { useTranslation } from "react-i18next";
 import "./PreviousRewards.css";
 import { useSound } from "@/shared/provider/SoundProvider";
 import Audios from "@/shared/assets/audio";
@@ -16,7 +15,6 @@ import RaffleSection from "@/widgets/PreviousRewards/ui/RaffleSection";
 import { PlayerData } from "@/features/PreviousRewards/types/PlayerData";
 
 const PreviousRaffle: React.FC = () => {
-  const { t } = useTranslation();
   const { playSfx } = useSound();
 
   // SL initial data store
@@ -74,7 +72,7 @@ const PreviousRaffle: React.FC = () => {
 
   return (
     <div className="flex flex-col mb-44 text-white items-center w-full min-h-screen">
-      <TopTitle title={t("reward_page.last_month")} className="px-6" back />
+      <TopTitle title={"지난 달 보상"} className="px-6" back />
 
       <RaffleSection
         currentRaffleIndex={currentRaffleIndex}

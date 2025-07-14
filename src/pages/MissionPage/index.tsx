@@ -15,7 +15,6 @@ import {
 import { formatNumber } from "@/shared/utils/formatNumber";
 import LoadingSpinner from "@/shared/components/ui/loadingSpinner";
 import { preloadImages } from "@/shared/utils/preloadImages";
-import { useTranslation, Trans } from "react-i18next";
 import { useSound } from "@/shared/provider/SoundProvider";
 import Audios from "@/shared/assets/audio";
 // import Attendance from "@/widgets/Attendance";
@@ -34,11 +33,10 @@ const OneTimeMissionCard: React.FC<OneTimeMissionCardProps> = ({
   const mapping = missionImageMap[mission.name];
   const imageSrc = mapping ? Images[mapping.imageKey] : Images.TokenReward;
   const className = mapping ? mapping.className : "";
-  const { t } = useTranslation();
   const { playSfx } = useSound();
 
   const translatedName = missionNamesMap[mission.name]
-    ? t(missionNamesMap[mission.name])
+    ? missionNamesMap[mission.name]
     : mission.name;
 
   // PENDING 상태 체크 (오버레이 없이 클릭 기능 유지)
@@ -93,7 +91,7 @@ const OneTimeMissionCard: React.FC<OneTimeMissionCardProps> = ({
             alt="Mission Completed"
             className="w-5 h-5"
           />
-          <p>{t("mission_page.Completed")}</p>
+          <p>완료</p>
         </div>
       )}
     </div>
@@ -107,7 +105,6 @@ interface DailyMissionProps {
 }
 
 const DailyMissionCard: React.FC<DailyMissionProps> = ({ title, image, alt }) => {
-  const { t } = useTranslation();
   return (
     <div className="basic-mission-card rounded-3xl p-5 text-white flex flex-col items-center gap-4">
        {/* 상단 이미지 */}
@@ -128,7 +125,6 @@ const DailyMissionCard: React.FC<DailyMissionProps> = ({ title, image, alt }) =>
         {/* 1) +10,000 Star Points 메시지 */}
         <div>
           <span className="font-normal text-sm mr-1">1)</span>
-          <Trans i18nKey="mission_page.starpoints_message">
             <span className="font-semibold text-base text-[#FDE047]">
               +10,000 Star Points
             </span>
@@ -136,29 +132,26 @@ const DailyMissionCard: React.FC<DailyMissionProps> = ({ title, image, alt }) =>
             <span className="font-normal text-sm">
               for both invitees and friends
             </span>
-          </Trans>
         </div>
 
          {/* 2) 10% Payback 메시지 */}
          <div>
           <span className="font-normal text-sm mr-1">2)</span>
-          <Trans i18nKey="mission_page.payback_message">
             <span className="font-semibold text-base text-[#FDE047] mr-1">
               10% Payback
             </span>
             <span className="font-normal text-sm">
               on Your Friend’s Purchase
             </span>
-          </Trans>
         </div>
 
         {/* NOTE 영역 */}
         <div className="flex items-center justify-center gap-1 mt-2">
           <img src={Images.Note} alt="Note" className="w-5 h-5 object-cover" />
-          <p className="text-sm font-semibold text-[#FDE047]">{t("mission_page.note")}</p>
+          <p className="text-sm font-semibold text-[#FDE047]">참고</p>
         </div>
         <p className="text-xs font-normal text-center">
-          {t("mission_page.only_user")}
+          최소 한 번의 게임 라운드(주사위 굴리기)를 완료한 사용자만 유효하며 혜택을 받을 수 있습니다.
         </p>
       </div>
     </div>
@@ -167,7 +160,6 @@ const DailyMissionCard: React.FC<DailyMissionProps> = ({ title, image, alt }) =>
 
 const MissionPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const { t } = useTranslation();
   const { playSfx } = useSound();
   const [eventShow, setEventShow] = useState(false);
   const { missions, fetchMissions, clearMission } = useMissionStore();
@@ -273,7 +265,7 @@ const MissionPage: React.FC = () => {
 
   return (
     <div className="flex flex-col text-white mb-20 md:mb-96 min-h-screen">
-      <TopTitle title={t("mission_page.Mission")} />
+      <TopTitle title={"미션 페이지"} />
 
       {/* 이벤트 배너 */}
       {eventShow && (
@@ -282,8 +274,8 @@ const MissionPage: React.FC = () => {
           style={{ backgroundImage: `url(${Images.eventBanner})` }}
         >
           <div className="text-white">
-            <p className="font-bold text-2xl">{t("mission_page.air_drop")}</p>
-            <p className="font-bold text-2xl">{t("mission_page.grab")}</p>
+            <p className="font-bold text-2xl">한정 기간 에어드랍!</p>
+            <p className="font-bold text-2xl">오늘 바로 받아가세요!</p>
           </div>
           <img
             src={Images.eventBox}
@@ -305,7 +297,7 @@ const MissionPage: React.FC = () => {
       {incompleteMissions.length > 0 && (
         <>
           <h1 className="font-semibold text-lg mb-4 ml-7 mt-5">
-            {t("mission_page.One_Time_Mission")}
+            일회성 미션
           </h1>
           <div className="grid grid-cols-2 gap-3 mx-6">
             {incompleteMissions.map((mission) => {
@@ -320,7 +312,7 @@ const MissionPage: React.FC = () => {
                 );
               } else {
                 const translatedName = missionNamesMap[mission.name]
-                  ? t(missionNamesMap[mission.name])
+                  ? missionNamesMap[mission.name]
                   : mission.name;
                 return (
                   <div className="col-span-2" key={mission.id}>
@@ -383,14 +375,12 @@ const MissionPage: React.FC = () => {
                             alt="Mission Completed"
                             className="w-5 h-5"
                           />
-                          <p>{t("mission_page.Completed")}</p>
+                          <p>완료</p>
                         </div>
                       )}
                     </div>
                     <p className="text-xs mb-8 mt-2 text-white whitespace-nowrap">
-                      {t(
-                        "mission_page.*_If_the_mission_is_not_performed_correctly,_you_may_be_excluded_from_the_final_reward."
-                      )}
+                      * 미션을 제대로 수행하지 않을 경우 최종 보상에서 제외될 수 있습니다.
                     </p>
                   </div>
                 );
@@ -402,12 +392,12 @@ const MissionPage: React.FC = () => {
 
       {/* 일일 미션 */}
       <h1 className="font-semibold text-lg my-4 ml-7">
-        {t("mission_page.Daily_Mission")}
+        일일 미션
       </h1>
       <div className="mx-6 mb-8">
         <Link to="/invite-friends" onClick={() => playSfx(Audios.button_click)}>
           <DailyMissionCard
-            title={t("mission_page.Invite_friends")}
+            title={"친구 초대"}
             alt="Invite Friend"
             image={Images.InviteFriend}
           />
@@ -418,7 +408,7 @@ const MissionPage: React.FC = () => {
       {completedMissions.length > 0 && (
         <>
           <h1 className="font-semibold text-lg mb-4 ml-7">
-            {t("mission_page.Completed_mission")}
+            완료된 미션
           </h1>
           <div className="grid grid-cols-2 gap-3 mx-6">
             {completedMissions.map((mission) => {
@@ -433,7 +423,7 @@ const MissionPage: React.FC = () => {
                 );
               } else {
                 const translatedName = missionNamesMap[mission.name]
-                  ? t(missionNamesMap[mission.name])
+                  ? missionNamesMap[mission.name]
                   : mission.name;
                 return (
                   <div className="col-span-2" key={mission.id}>
@@ -496,7 +486,7 @@ const MissionPage: React.FC = () => {
                             alt="Mission Completed"
                             className="w-5 h-5"
                           />
-                          <p>{t("mission_page.Completed")}</p>
+                          <p>완료</p>
                         </div>
                       )}
                     </div>

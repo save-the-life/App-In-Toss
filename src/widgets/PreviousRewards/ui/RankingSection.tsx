@@ -11,7 +11,6 @@ import {
 import { PlayerData } from "@/features/PreviousRewards/types/PlayerData";
 import LoadingSpinner from "@/shared/components/ui/loadingSpinner";
 import ErrorMessage from "@/shared/components/ui/ErrorMessage";
-import { useTranslation } from "react-i18next";
 
 interface RankingSectionProps {
   myData: PlayerData | null;
@@ -40,7 +39,6 @@ const RankingSection: React.FC<RankingSectionProps> = ({
   rangeError,
   handleRangeClick,
 }) => {
-  const { t } = useTranslation();
   const showMyInDialog = myData !== null && dialogRankings.some((r) => r.rank === myData.rank);
 
   // 내 순위 PASS 텍스트
@@ -60,15 +58,15 @@ const RankingSection: React.FC<RankingSectionProps> = ({
         myData.rank > 1000 ? (
           <div className="relative flex flex-col box-bg rounded-3xl border-2 border-[#0147E5] p-5 h-24 justify-center items-center">
             <p className="font-semibold text-sm text-center">
-              {t("reward_page.your_rank")}
+              당신의 랭킹: #
               <span className="text-[#FDE047] font-bold">{myData.rank}</span>
               <br />
-              {t("reward_page.keep_play")}
+              계속 참여하여 다음 기회를 노려보세요!
             </p>
           </div>
         ) : (
           <>
-            <p className="font-semibold">{t("reward_page.congrate")}</p>
+            <p className="font-semibold">축하드립니다! 보상이 지급되었습니다.</p>
             <div className="relative flex flex-row items-center box-bg rounded-3xl h-24 border-2 border-[#0147E5] mt-3 p-5 gap-3">
               <p className="text-center w-1/6">{myData.rank}</p>
               <div className="flex flex-col justify-center items-center gap-1 flex-1">
@@ -94,16 +92,16 @@ const RankingSection: React.FC<RankingSectionProps> = ({
       ) : (
         <div className="relative flex flex-col box-bg rounded-3xl border-2 border-[#0147E5] p-5 h-full justify-center items-center">
           <p className="font-semibold text-sm text-center">
-            {t("reward_page.you_didnt")}
+            이번에는 랭킹에 들지 못했습니다.
             <br />
-            {t("reward_page.keep_play")}
+            계속 참여하여 다음 기회를 노려보세요!
           </p>
         </div>
       )}
 
       {/* Top Rankings */}
       <div className="flex flex-col mt-8">
-        <p className="font-semibold">{t("reward_page.ranking_reward")}</p>
+        <p className="font-semibold">랭킹 리워드</p>
         {topRankings.length > 0 ? (
           topRankings.slice(0, 20).map((r) => {
             // 1~3위 패스 추가 텍스트
@@ -158,7 +156,7 @@ const RankingSection: React.FC<RankingSectionProps> = ({
           })
         ) : (
           <p className="text-center text-sm mt-7">
-            {t("reward_page.no_ranking")}
+            랭킹 정보가 없습니다.
           </p>
         )}
       </div>

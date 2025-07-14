@@ -1,7 +1,6 @@
 import { IoDice, IoGameController, IoTicket } from 'react-icons/io5';
 import Images from '@/shared/assets/images';
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 
 interface NFTReward {
   imgSrc: string;
@@ -29,7 +28,6 @@ const NFTRewardCard: React.FC<NFTReward> = ({ imgSrc, altText, title, rewards })
 
 const NFTRewardList: React.FC = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
 
   const nftRewards = [
     {
@@ -39,11 +37,11 @@ const NFTRewardList: React.FC = () => {
       rewards: [
         { 
           icon: <IoGameController className="w-5 h-5" />, 
-          description: `${t("dice_event.game_board_points")} : x3` 
+          description: `게임 보드 포인트 : x3` 
         },
         { 
           icon: <IoTicket className="w-5 h-5" />, 
-          description: `${t("dice_event.raffle_tickets")} : x2` 
+          description: `래플 티켓 : x2` 
         },
       ],
     },
@@ -54,11 +52,11 @@ const NFTRewardList: React.FC = () => {
       rewards: [
         { 
           icon: <IoGameController className="w-5 h-5" />, 
-          description: `${t("dice_event.game_board_points")} : x2` 
+          description: `게임 보드 포인트 : x2` 
         },
         { 
           icon: <IoTicket className="w-5 h-5" />, 
-          description: `${t("dice_event.raffle_tickets")} : x2` 
+          description: `래플 티켓 : x2` 
         },
       ],
     },
@@ -69,11 +67,11 @@ const NFTRewardList: React.FC = () => {
       rewards: [
         { 
           icon: <IoGameController className="w-5 h-5" />, 
-          description: `${t("dice_event.game_board_points")} : x1` 
+          description: `게임 보드 포인트 : x1` 
         },
         { 
           icon: <IoTicket className="w-5 h-5" />, 
-          description: `${t("dice_event.raffle_tickets")} : x2` 
+          description: `래플 티켓 : x2` 
         },
       ],
     },
@@ -84,7 +82,7 @@ const NFTRewardList: React.FC = () => {
       rewards: [
         { 
           icon: <IoGameController className="w-5 h-5" />, 
-          description: `${t("dice_event.board_spin_reward")} : x2` 
+          description: `게임 보드 포인트 : x2` 
         },
       ],
     },
@@ -98,7 +96,7 @@ const NFTRewardList: React.FC = () => {
         ))}
       </div>
       <button onClick={()=>{navigate("/item-store")}} className=" sticky bottom-0 font-medium bg-[#0147E5] rounded-full h-14 w-[165px] self-center">
-        {t("asset_page.shop_item")}
+        아이템 구매하기
       </button>
     </div>
   );

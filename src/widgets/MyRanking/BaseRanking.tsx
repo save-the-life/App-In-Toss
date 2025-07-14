@@ -4,7 +4,6 @@ import CountUp from 'react-countup';
 import { motion, AnimatePresence } from 'framer-motion';
 import { IoIosArrowRoundUp, IoIosArrowRoundDown } from 'react-icons/io';
 import Images from '@/shared/assets/images';
-import { useTranslation } from 'react-i18next';
 
 export interface BaseRankingProps {
   rank: number;
@@ -25,7 +24,6 @@ export const BaseRanking: React.FC<BaseRankingProps> = ({
   className = '',
   titleHidden = true
 }) => {
-  const { t } = useTranslation();
 
   // --- 1) 애니메이션 트리거 상태 ---
   const [showRankText, setShowRankText] = useState<'myRank'|'rankUp'|'rankDown'>('myRank');
@@ -126,7 +124,7 @@ export const BaseRanking: React.FC<BaseRankingProps> = ({
   return (
     <div className={`flex flex-col items-center justify-center text-white cursor-pointer w-full ${className}`} role="button">
       {/* Title */}
-      <h1 className={`font-jalnan text-3xl ${titleHidden ? 'hidden' : 'block'}`}>{t('dice_event.my_rank')}</h1>
+      <h1 className={`font-jalnan text-3xl ${titleHidden ? 'hidden' : 'block'}`}>나의 랭킹</h1>
 
       <div className={`bg-box px-8 w-full h-24 md:h-32 flex font-semibold ${titleHidden ? 'mt-0' : 'mt-4'}`}>
         {/* Rank text & number */}
@@ -171,7 +169,7 @@ export const BaseRanking: React.FC<BaseRankingProps> = ({
       </div>
 
       {/* Footer text */}
-      <p className="w-full font-medium text-xs md:text-sm mt-2 px-2 text-left">* {t('dice_event.ranking_base')}</p>
+      <p className="w-full font-medium text-xs md:text-sm mt-2 px-2 text-left">* 랭킹은 스타 포인트를 기준으로 합니다</p>
     </div>
   );
 };

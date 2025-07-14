@@ -10,7 +10,6 @@ import {
 import Images from "@/shared/assets/images";
 import { formatNumber } from "@/shared/utils/formatNumber";
 import { useRPSGameStore } from "../store";
-import { useTranslation } from "react-i18next";
 
 interface RPSGameStartProps {
   onStart: () => void;
@@ -25,7 +24,6 @@ const RPSGameStart: React.FC<RPSGameStartProps> = ({
 }) => {
   const [betAmount, setBetAmount] = useState<string>("");
   const setBetAmountStore = useRPSGameStore((state) => state.setBetAmount);
-  const { t } = useTranslation();
   
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,9 +61,9 @@ const RPSGameStart: React.FC<RPSGameStartProps> = ({
   return (
     <div className="h-screen md:min-w-[600px] flex flex-col items-center justify-center px-12">
       <h1 className="text-[#E20100] font-jalnan text-center text-[26px] mt-4 whitespace-nowrap">
-        {t("dice_event.rps_game.title_1")}
+        3배 혹은 꽝!
         <br />
-        {t("dice_event.rps_game.title_2")}
+        당신의 운을 시험해 보세요!
       </h1>
 
       <div className="flex flex-col items-center justify-center mt-4">
@@ -79,7 +77,7 @@ const RPSGameStart: React.FC<RPSGameStartProps> = ({
           <Popover>
             <PopoverTrigger className="flex flex-row gap-1 border-2 border-[#21212f] rounded-3xl text-center bg-white text-[#171717] font-medium w-[165px] h-[72px] items-center justify-center">
               <AiFillQuestionCircle className="w-6 h-6" />
-              <p>{t("dice_event.rps_game.how_to")}</p>
+              <p>게임 방법</p>
             </PopoverTrigger>
             <PopoverContent
               className="rounded-3xl border-2 border-[#21212f] bg-white"
@@ -90,34 +88,34 @@ const RPSGameStart: React.FC<RPSGameStartProps> = ({
             >
               <div className="text-black p-4 rounded-lg shadow-lg w-full max-w-lg">
                 <h2 className="text-xl font-bold text-center mb-4">
-                  ✼ {t("dice_event.rps_game.instruction")} ✼
+                  ✼ 게임 설명 ✼
                 </h2>
                 <ol className="text-sm leading-loose space-y-4">
                   <li>
-                    <strong>{t("dice_event.rps_game.enter")}</strong>
+                    <strong>베팅 금액 입력</strong>
                     <ul className="list-disc pl-5">
-                      <li>{t("dice_event.rps_game.max")}</li>
+                      <li>최대 베팅 가능액은 총 별(Stars)의 절반입니다.</li>
                     </ul>
                   </li>
                   <li>
-                    <strong>{t("dice_event.rps_game.play")}</strong>
+                    <strong>가위바위보 게임 시작</strong>
                     <ul className="list-disc pl-5">
-                      <li>{t("dice_event.rps_game.choose")}</li>
-                      <li>{t("dice_event.rps_game.3_rounds")}</li>
+                      <li>각 라운드에서 가위, 바위, 보 중 하나를 선택하세요.</li>
+                      <li>최대 3라운드를 진행합니다.</li>
                     </ul>
                   </li>
                   <li>
-                    <strong>{t("dice_event.rps_game.win")}</strong>
+                    <strong>보상 획득</strong>
                     <ul className="list-disc pl-5">
-                      <li>{t("dice_event.rps_game.tripled")}</li>
-                      <li>{t("dice_event.rps_game.multifly")}</li>
+                      <li>한 라운드를 이기면 베팅 금액이 3배가 됩니다.</li>
+                      <li>연속으로 승리 시 보상이 배로 누적됩니다.</li>
                     </ul>
                   </li>
                   <li>
-                    <strong>{t("dice_event.rps_game.continue")}</strong>
+                    <strong>계속하거나 멈추기</strong>
                     <ul className="list-disc pl-5">
-                      <li>{t("dice_event.rps_game.cash_out")}</li>
-                      <li>{t("dice_event.rps_game.losing")}</li>
+                      <li>라운드에 승리 후, 계속 도전하거나 종료하여 수익을 확정할 수 있습니다.</li>
+                      <li>한 번이라도 패배하면 베팅 금액을 잃습니다.</li>
                     </ul>
                   </li>
                 </ol>
@@ -125,7 +123,7 @@ const RPSGameStart: React.FC<RPSGameStartProps> = ({
             </PopoverContent>
           </Popover>
           <div className="flex flex-col gap-1 border-2 border-[#21212f] rounded-3xl text-center bg-white text-[#171717] font-medium w-[165px] h-[72px] items-center justify-center">
-            <p className="text-xs text-[#737373]">{t("dice_event.rps_game.allowed")}</p>
+            <p className="text-xs text-[#737373]">허용 베팅 금액</p>
             <div className="flex flex-row items-center justify-center gap-3">
               <img src={Images.Star} alt="Star" className="w-6 h-6" />
               <p>{formatNumber(allowedBetting)}</p>
@@ -148,7 +146,7 @@ const RPSGameStart: React.FC<RPSGameStartProps> = ({
               type="button"
               onClick={handleCancelClick}
             >
-              {t("dice_event.rps_game.cancel")}
+              취소
             </button>
             <button
               type="submit"
@@ -164,7 +162,7 @@ const RPSGameStart: React.FC<RPSGameStartProps> = ({
               }
               // onClick={handleStartClick} // 이미 onSubmit에서 처리하므로 제거
             >
-              {t("dice_event.rps_game.bet")}
+              배팅
             </button>
           </div>
         </form>

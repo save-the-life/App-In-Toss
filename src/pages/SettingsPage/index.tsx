@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { TopTitle } from '@/shared/components/ui';
 import { FaChevronLeft } from 'react-icons/fa';
-import { useTranslation } from "react-i18next";
 import { useSound } from "@/shared/provider/SoundProvider";
 import Audios from "@/shared/assets/audio";
 import deleteUser from '@/entities/User/api/delUser';
 
 const SettingsPage: React.FC =() => {
     const navigate = useNavigate();
-    const { t } = useTranslation();
     const { playSfx } = useSound();
     const [isCardFlipGameActive, setIsCardFlipGameActive] = useState(false);
 
@@ -35,46 +33,39 @@ const SettingsPage: React.FC =() => {
 
             <div className="w-full">
                 {/* 서비스 이용 약관 */}
-                <div 
+                {/* <div 
                     className="bg-gray-800 p-4 rounded-lg mb-4 flex justify-between items-center"
                     onClick={() => handleNavigation('service')}>
                     <div>
                         <p className="font-semibold">{t("setting.terms_of_service")}</p>
                     </div>
                     <FaChevronLeft className="text-lg cursor-pointer transform rotate-180" />
-                </div>
+                </div> */}
                 {/* 개인정보 처리 방침 */}
-                <div 
+                {/* <div 
                     className="bg-gray-800 p-4 rounded-lg mb-4 flex justify-between items-center"
                     onClick={() => handleNavigation('privacy')}>
                     <div>
                         <p className="font-semibold">{t("setting.privacy_policy")}</p>
                     </div>
                     <FaChevronLeft className="text-lg cursor-pointer transform rotate-180" />
-                </div>
+                </div> */}
                 {/* 전자상거래 이용약관 */}
-                <div 
+                {/* <div 
                     className="bg-gray-800 p-4 rounded-lg mb-4 flex justify-between items-center"
                     onClick={() => handleNavigation('commerce')}>
                     <div>
                         <p className="font-semibold">{t("setting.electronic_commerce_policy")}</p>
                     </div>
                     <FaChevronLeft className="text-lg cursor-pointer transform rotate-180" />
-                </div>
+                </div> */}
                 
-                <div 
-                    className="bg-gray-800 p-4 rounded-lg mb-4 flex justify-between items-center"
-                    onClick={handleLanguage}>
-                    <div>
-                        <p className="font-semibold">{t("setting.language")}</p>
-                    </div>
-                    <FaChevronLeft className="text-lg cursor-pointer transform rotate-180" />
-                </div>
+                
                 <div 
                     className="bg-gray-800 p-4 rounded-lg mb-4 flex justify-between items-center"
                     onClick={handleSound}>
                     <div>
-                        <p className="font-semibold">{t("setting.sound")}</p>
+                        <p className="font-semibold">소리 설정</p>
                     </div>
                     <FaChevronLeft className="text-lg cursor-pointer transform rotate-180" />
                 </div>

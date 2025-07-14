@@ -4,7 +4,6 @@ import { TopTitle } from '@/shared/components/ui';
 import './InviteFriends.css';
 import Images from '@/shared/assets/images';
 import { BiCopy } from 'react-icons/bi';
-import { useTranslation, Trans } from 'react-i18next';
 import LoadingSpinner from '@/shared/components/ui/loadingSpinner';
 import getFriends from '@/entities/Mission/api/friends';
 import { formatNumber } from '@/shared/utils/formatNumber';
@@ -46,7 +45,6 @@ interface Friend {
 
 const InviteFriends: React.FC = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
   const { playSfx } = useSound();
   const [copySuccess, setCopySuccess] = useState<string>(''); // 클립보드 복사 결과 메시지
   const [referralLink, setReferralLink] = useState<string>(''); // 레퍼럴 코드 상태
@@ -126,8 +124,8 @@ const InviteFriends: React.FC = () => {
 
   return (
     <div className="flex flex-col mx-6 mb-44 text-white items-center min-h-screen">
-      <TopTitle title={t('mission_page.Invite_Friend')} back={true} />
-      <p>{t('mission_page.Referral_Code')}</p>
+      <TopTitle title={"친구 초대"} back={true} />
+      <p>추천 코드</p>
       <button
         className="flex flex-row gap-2 items-center border border-white rounded-full w-56 md:w-80 h-16 justify-center mt-2 px-4"
         onClick={copyToClipboard}
@@ -148,24 +146,24 @@ const InviteFriends: React.FC = () => {
           </div>
         </div>
 
-        <p className="text-xl font-semibold text-center">
+        {/* <p className="text-xl font-semibold text-center">
           <Trans i18nKey="referral.title" components={{ 1: <br /> }} />
         </p>
         <p className="text-sm font-medium mt-2 text-center">
           <Trans i18nKey="referral.description" components={{ 1: <br /> }} />
-        </p>
+        </p> */}
 
         <button 
           className="h-14 w-[302px] rounded-full bg-[#21212f] my-5"
           onClick={handleInviteClick}>
-          {t('mission_page.Invite_Friends_and_Get_Reward')}
+          친구를 초대하고 보상을 받으세요
         </button>
       </div>
 
       {friends.length > 0 ? ( // 친구 목록이 존재하는 경우에만 렌더링
         <div className="flex flex-col mt-8 w-full gap-3">
           <div className="flex flex-row justify-between items-center mb-[6px]">
-            <p className="text-lg font-medium">{t('mission_page.Invited_Friends')}</p>
+            <p className="text-lg font-medium">초대된 친구</p>
             <div
               className="flex items-center justify-center text-sm font-medium w-[72px] h-8 rounded-full bg-[#21212f]"
               onClick={()=>{
