@@ -1,58 +1,46 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import SplashScreen from "./SplashScreen";
-import { requestAuthorizationCode } from "@/entities/User/api/toss/requestAuthorizationCode";
-import { generateToken, refreshToken } from "@/entities/User/api/toss/generateToken";
-import { fetchUserInfo, UserInfo } from "@/entities/User/api/toss/fetchUserInfo";
-
+import { appLogin } from '@apps-in-toss/web-framework';
 
 // 앱 초기화 페이지 -> 토스 로그인 및 회원 가입 진행
 interface AppInitializerProps {
     onInitialized: () => void;  
 }
 
-const SCOPES = [
-    "user_name",
-    "user_phone",
-    "user_birthday",
-    "user_ci",
-    "user_gender",
-    "user_nationality",
-    // email 은 가입 시 없을 수도 있으니 옵션
-];
-
 const AppInitializer: React.FC<AppInitializerProps> = ({ onInitialized }) => {
-    const navigate = useNavigate();
     const [showSplash, setShowSplash] = useState(true);
-    // const { setTokens, setUserInfo } = useUserStore();
     const [error, setError] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        console.log("Check Toss Login");
-        (async () => {
-            try {
-                console.log("인증 코드 확인")
-                const { authorizationCode, referrer } = await requestAuthorizationCode(SCOPES);
-                console.log("토큰 발급");
-                const { access_token, refresh_token } = await generateToken(authorizationCode, referrer);
-                console.log("사용자 정보 획득");
-                // setTokens({ accessToken: access_token, refreshToken: refresh_token, /*…*/ });
-                const userInfo = await fetchUserInfo(access_token);
-                // setUserInfo(userInfo);
-                onInitialized();
+    const handleLogin = async () => {
+        setIsLoading(true);
+        setError(null);
+        try {
+            console.log("토스 인증 시작");
+            const { authorizationCode, referrer } = await appLogin();
+            console.log("토스 인증 성공:", { authorizationCode, referrer });
+            // 이후 authorizationCode, referrer를 서버에 전달하거나 추가 로직 실행
+            onInitialized();
         } catch (err: any) {
-            setError(err.message);
-          }
-        })();
-    }, []);
+            console.error("토스 인증 실패:", err);
+            setError(err.message || "알 수 없는 에러");
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
+    // if (showSplash) {
+    //     return <SplashScreen />;
+    // }
 
-    
-    if (showSplash) {
-        return <SplashScreen />;
-    }
-    
-    return null;
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 40 }}>
+            <button onClick={handleLogin} disabled={isLoading} style={{ padding: '12px 24px', fontSize: 18 }}>
+                {isLoading ? '인증 중...' : '토스 인증으로 로그인'}
+            </button>
+            {error && <div style={{ color: 'red', marginTop: 16 }}>{error}</div>}
+        </div>
+    );
 };
 
 export default AppInitializer;
